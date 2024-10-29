@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animate.min.css">
+    <link rel="shortcut icon" href="images/check.png" type="image/png">
+    <title>Grade Checker</title>
+</head>
+<body>
+  <div class="container-fluid">
+
+        <div class="text-center mb-4">
+            <img src="images/book.png" alt="check-result" class="img-fluid image1" style="max-width: 200px;">
+        </div>
+    
+        <div class="container animate__animated animate__zoomIn mt-lg-5 rounded-5 mt-4 col-lg-6 col-md-8 col-10 mx-auto shadow-buttom shadow-lg rounded-5 py-lg-3 px-lg-5 px-4">  
+
+            <div class="d-flex justify-content-center">
+                <h2 class="display-flexbox text-center mx-3 animate__animated animate__slow animate__fadeInLeftBig animate__delay-1s display-6 my-lg-1 my-auto">Grade</h2>
+                <h2 class="display-flexbox text-center animate__animated animate__slow animate__fadeInRightBig animate__delay-1s display-6 my-lg-1 my-auto">Checker</h2>
+            </div>
+
+                <h2 class="text-center display-8 my-lg-3 text-white my-auto animate__delay-1s py-lg-2 animate__animated animate__fadeInLeftBig belowGC">Enter your score to see your grade</h2>
+                <input type="number" title="Kindly enter your Score" min="1" max="100" placeholder="Enter your score" class="form-control p-3 rounded-4 shadow my-lg-3 my-3 p-1 ps-4 animate__delay-1s animate__animated animate__fadeInRightBig" required id="score">
+                <button onclick="gradeChecker()" class="btn fw-btn d-flex align-items-center rounded-5 justify-content-center mx-auto fw-bold text-center py-lg-2 rounded mt-lg-4 mb-4 w-50 px-lg-4 animate__slow animate__delay-1s animate__animated animate__fadeInUpBig">Check
+                    <img src="images/check.png" class="d-inline-flex ms-2 align-items-center w-custom" alt="">
+                </button>
+                <div class="text-center shadow fw-bold fs-4 w-50 mx-auto my-2" id="showResults"></div>
+            <marquee delay="2000" scrollamount="5" loop="infinite" class="animate__animated animate__marquee" behavior="scroll" direction="left" >"Success is not final, failure is not fatal: It is the courage to continue that counts." – Winston S. Churchill.</marquee>
+        </div>
+  </div>
+
+<div id="overlay">
+    <img src="images/drops.gif" alt="congrats">
+</div>
+  
+    <script>
+        var songExcellent = new Audio('songs/clap.mp3');
+        var songInvalid = new Audio('songs/invalid.mp3');
+        var songFail = new Audio('songs/fail.mp3');
+
+        function gradeChecker() { 
+            var userScore = Number(score.value);
+
+            if (score.value === '') {
+                alert('Kindly input your score');
+            
+            } else if (userScore >= 0 && userScore < 40) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'F - Fail ';
+                showResults.classList.add('animate__animated', 'animate__shakeX',  'text-danger');
+                songFail.play();
+
+            } else if (userScore >= 40 && userScore < 45) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'E - Poor';
+                showResults.classList.add('animate__animated', 'animate__wobble', 'animate__slow', 'text-secondary');
+
+            } else if (userScore >= 45 && userScore < 50) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'D - Fair';
+                showResults.classList.add('animate__animated', 'animate__wobble', 'animate__slow', 'text-muted');
+
+            } else if (userScore >= 50 && userScore < 60) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'C - Good';
+                showResults.classList.add('animate__animated', 'animate__jello', 'animate__slow', 'text-muted');
+
+            } else if (userScore >= 60 && userScore < 70) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'B - Very Good';
+                showResults.classList.add('animate__animated', 'animate__rubberBand', 'animate__slow', 'text-primary');
+
+            } else if (userScore >= 70 && userScore <= 100) {
+                showResults.innerHTML = '';
+                showResults.innerHTML = 'A - Excellent 🎉';
+                showResults.classList.add('animate__animated', 'animate__bounce', 'animate__slow', 'text-success');
+                overlay.style.display = 'flex'; 
+                songExcellent.play();
+
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                    songExcellent.pause();
+                }, 7000);
+
+            } else {
+                showResults.innerHTML = 'Invalid Score❌';
+                songInvalid.play()
+                showResults.classList.add('animate__animated', 'animate__shakeX', 'text-danger');
+            }
+        }
+    </script>
+</body>
+</html>
